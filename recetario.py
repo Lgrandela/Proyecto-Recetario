@@ -8,7 +8,7 @@ estas opciones que tenemos aquí:
 '''
 #*******************************************************************************************************#
 'USAREMOS ESTA RUTA COMO PRINCIPAL QUE ES LA CARPETA "Recetas" DONDE SE ENCUENTRAN LAS CATEGORIAS'
-ruta_principal = Path(Path.home(),'Proyecto Recetario','Recetas')
+ruta_principal = Path(Path.home(),'Proyecto-Recetario','Recetas')
 recetitas = [numero.stem for numero in Path(ruta_principal).glob('**/*.txt')]
 numero_recetas = len(recetitas)
 # Tenemos que darle la bienvenida al usuario e indicarle la ruta de acceso al directorio donde se encuentra nuestra carpeta de recetas
@@ -29,7 +29,8 @@ def mostrar_categorias():
     lista_categorias = []    
     for categoria in categorias.iterdir():
         lista_categorias.append(categoria.name)
-        print(categoria.name)
+        # print(categoria.name)
+    print(lista_categorias)
     return lista_categorias
     
 def elegir_categoria():
@@ -86,7 +87,7 @@ def eliminar_categoria():
 def opciones(num):
     if num == 1:
         mostrar_categorias()
-        elegir_categoria()
+        # elegir_categoria()
         eleccion_usuario = elegir_categoria()
         leer_receta(eleccion_usuario)
     elif num == 2:
@@ -106,15 +107,17 @@ def opciones(num):
 
 
 bienvenida()
-
-print("""
-      Por Favor, elija una de las siguientes categorías introduciendo el número que marca dicha categoría:\n
-      1. Mostrar y elegir categoría para leer receta.\n
-      2. Crear Receta.\n
-      3. Crear Categoría.\n
-      4. Eliminar receta.\n
-      5. Eliminar Categoría.\n
-      6. Finalizar aplicación.\n""")
-numero = int(input(""))
-print("\n")
-opciones(numero)
+finalizar = False
+while finalizar != True:
+    
+    print("""
+        Por Favor, elija una de las siguientes categorías introduciendo el número que marca dicha categoría:\n
+        1. Mostrar y elegir categoría para leer receta.\n
+        2. Crear Receta.\n
+        3. Crear Categoría.\n
+        4. Eliminar receta.\n
+        5. Eliminar Categoría.\n
+        6. Finalizar aplicación.\n""")
+    numero = int(input("¿qué número elije?:  "))
+    print("\n")
+    opciones(numero)
