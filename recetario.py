@@ -143,7 +143,7 @@ def eliminar_receta(eleccion):
     '5. La opción 5, le va a preguntar qué categoría quiere eliminar'
 def eliminar_categoria():
     categorias = ruta_principal
-    lista_categorias = []    
+    lista_categorias = []
     for categoria in categorias.iterdir():
         lista_categorias.append(categoria.name)
         print(categoria.name)
@@ -151,9 +151,18 @@ def eliminar_categoria():
     preguntar = True
     while preguntar == True:
         if eleccion.capitalize() in lista_categorias:
-            remove_ruta = Path(ruta_principal,eleccion)
-            remove_ruta.rmdir()
-            preguntar = False
+            #comprobamos si la carpeta está vacia
+            llena = any(Path(ruta_principal,eleccion).iterdir())
+            if not llena:
+                categoria = Path(categorias,eleccion)
+                remove_ruta = Path(ruta_principal,eleccion)
+                remove_ruta.rmdir()
+                preguntar = False
+            else:
+                eleccion = "error"
+                print('------------')
+                print('La carpeta NO está vacia por lo que no se puede eliminar')
+                print('------------')
         else:
             print('\nTambién puede volver al inicio escribiendo "Salir"\n')
             print("Por favor, elija una categoría correcta y escríbala tal y como aparece en pantalla.\n")
